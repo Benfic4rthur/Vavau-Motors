@@ -28,7 +28,7 @@ O repositório foi tornado público com autorização do proprietário para usar
 
 A capa escolhe a moto disponível com foto mais recente por **data da publicação**. `#destaque` na legenda tem prioridade; entre vários destaques, ganha o mais recente. Motos vendidas saem da seleção. Sem estoque, aparece a identidade institucional. A cor da moto define a paleta, mantendo o dourado da marca.
 
-Catálogo inicial conferido em 14/10/2026: 29 motos anunciadas como disponíveis, 270 fotos de motos e 7 registros de entregas. Só foram importadas publicações de 01/01/2025 em diante; esse corte não se refere ao ano da moto. Fotos de entregas ficam separadas do estoque. Não há avaliações ou depoimentos inventados. Peças, equipamentos e serviços foram removidos do escopo.
+Catálogo inicial conferido em 14/10/2026: 29 motos anunciadas como disponíveis, 270 fotos de motos e 12 registros de entregas. O estoque usa publicações de 01/01/2025 em diante; esse corte não se refere ao ano da moto. A pedido do proprietário, cinco entregas antigas de outubro de 2023 foram acrescentadas ao histórico em 15/10/2026, com fotos e datas conferidas no Instagram. Fotos de entregas ficam separadas do estoque. Não há avaliações ou depoimentos inventados. Peças, equipamentos e serviços foram removidos do escopo.
 
 Para correções, use o ID do registro em `data/overrides.json`:
 
@@ -52,7 +52,7 @@ Os scripts de importação pública permanecem no código apenas como ferramenta
 
 ## Administração no Vercel
 
-A vitrine está em https://vavau-motos.vercel.app/ e o painel em https://vavau-motos.vercel.app/admin. Abra `/admin`. O painel permite cadastrar motos e entregas, enviar até 30 fotos por cadastro, reorganizar a galeria, ajustar preço/quilometragem, escolher destaque, trabalhar em rascunho e marcar uma moto como vendida. Não há checkout. Acesso em `Meu acesso` permite alterar login e senha, exigindo a senha atual.
+A vitrine está em https://vavau-motos.vercel.app/ e o painel em https://vavau-motos.vercel.app/admin. Abra `/admin`. O painel permite cadastrar motos e entregas, enviar até 30 fotos por cadastro, reorganizar a galeria, informar o nome do cliente e a moto entregue nas histórias, ajustar preço/quilometragem, escolher destaque, trabalhar em rascunho e marcar uma moto como vendida. Não há checkout. Acesso em `Meu acesso` permite alterar login e senha, exigindo a senha atual.
 
 A Vercel executa apenas `api/admin.ts`; o frontend continua estático. Configure no projeto em Production (repita em Preview se precisar de um ambiente de testes com gravação):
 
@@ -81,4 +81,4 @@ Em desenvolvimento, `.env.local` habilita um adaptador isolado: mudanças ficam 
 
 ### Verificação do painel em 15/10/2026
 
-Os 18 testes automatizados, a checagem TypeScript e o build passaram. Na produção, o login com cookie HttpOnly, o carregamento dos 36 cadastros e a conexão de gravação foram verificados. Um upload real enviou uma foto WebP, criou um rascunho em um único commit e confirmou a foto no GitHub. O endpoint público manteve os 36 registros publicados e excluiu o rascunho. O commit do teste foi revertido, removendo o cadastro temporário e sua foto da versão atual.
+Os 19 testes automatizados, a checagem TypeScript e o build passaram. Na produção, o login com cookie HttpOnly, o carregamento dos 36 cadastros e a conexão de gravação foram verificados. Um upload real enviou uma foto WebP, criou um rascunho em um único commit e confirmou a foto no GitHub. O endpoint público manteve os 36 registros publicados e excluiu o rascunho. O commit do teste foi revertido, removendo o cadastro temporário e sua foto da versão atual.

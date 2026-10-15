@@ -74,7 +74,9 @@ test('published seed is validated, contains only current-scope records and every
   for(const p of products){
     assert.ok(!ids.has(p.id));ids.add(p.id);
     assert.equal(p.status,'available');assert.ok(['moto','cliente'].includes(p.kind));
-    assert.ok(Date.parse(p.sourceDate)>Date.parse('2024-12-31'));
+    assert.ok(Number.isFinite(Date.parse(p.sourceDate)));
+    if(p.kind==='moto')assert.ok(Date.parse(p.sourceDate)>=Date.parse('2025-01-01'));
+    else assert.equal(p.price,null);
     assert.ok(p.images.length>0);
     for(const image of p.images){assert.ok(image.startsWith('/assets/'));await access('public'+image);}
   }

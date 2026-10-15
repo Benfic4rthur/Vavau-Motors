@@ -2,7 +2,8 @@ import {z} from 'zod';
 const image = z.string().max(2000).refine(s => /^\/(assets\/|api\/media\/)[\w./-]+$/.test(s) || /^https:\/\//.test(s), 'Use uma imagem enviada ou uma URL HTTPS.');
 export const productSchema = z.object({
  id:z.string().min(1).max(120).regex(/^[\w-]+$/), kind:z.enum(['moto','peca','equipamento','servico','cliente']), name:z.string().trim().min(3).max(160),
- brand:z.string().max(80).default(''), model:z.string().max(120).default(''), category:z.string().min(1).max(80),
+ customerName:z.string().trim().max(120).default(''),
+ brand:z.string().max(80).default(''), model:z.string().trim().max(120).default(''), category:z.string().min(1).max(80),
  year:z.number().int().min(1900).max(2100).nullable().default(null), manufactureYear:z.number().int().min(1900).max(2100).nullable().default(null),
  km:z.number().int().min(0).max(3000000).nullable().default(null), price:z.number().min(0).max(10000000).nullable().default(null), color:z.string().max(80).default(''),
  engineCc:z.number().min(0).max(10000).nullable().default(null), horsepower:z.number().min(0).max(1000).nullable().default(null),

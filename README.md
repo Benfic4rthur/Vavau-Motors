@@ -102,3 +102,7 @@ Se a autorização do GitHub ainda não estiver configurada, o login funciona em
 Para migração, leve o repositório e configure as mesmas variáveis no novo backend Node. Preserve o `ADMIN_SESSION_SECRET` para ler o acesso cifrado já salvo ou recupere o acesso removendo o arquivo cifrado em um commit autorizado e configurando novos valores iniciais. `site.config.json` informa os endereços públicos da API e do admin.
 
 Em desenvolvimento, `.env.local` habilita um adaptador isolado: mudanças ficam em `work/admin-local/`, sem gravar no catálogo real ou no GitHub. Os testes verificam autenticação, origem, sessão, troca de acesso cifrada, fotos, estados públicos e conflitos de commit.
+
+### Verificação do painel em 15/10/2026
+
+Os 18 testes automatizados, a checagem TypeScript e o build passaram. Na produção, o login com cookie HttpOnly, o carregamento dos 36 cadastros e a conexão de gravação foram verificados. Um upload real enviou uma foto WebP, criou um rascunho em um único commit e confirmou a foto no GitHub. O endpoint público manteve os 36 registros publicados e excluiu o rascunho. O commit do teste foi revertido, removendo o cadastro temporário e sua foto da versão atual.

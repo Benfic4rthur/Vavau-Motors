@@ -24,11 +24,15 @@ const observedSources=new Map(index.map(item=>{const url=typeof item==='string'?
 const byCode=new Map(existing.filter(p=>p.source).map(p=>[postCode(p.source),p]));
 try{
   const response=await page.goto('https://www.instagram.com/vavaumotos/',{waitUntil:'domcontentloaded',timeout:35000});
+  report.profileStatus=response?.status()||null;
+  report.profilePath=new URL(page.url()).pathname;
   if(response?.ok()){
+    await dismissSignup();
     await page.waitForSelector('a[href*="/p/"],a[href*="/reel/"]',{timeout:12000}).catch(()=>{});
     const urls=await page.locator('a[href*="/p/"],a[href*="/reel/"]').evaluateAll(links=>links.map(a=>a.href));
     for(const url of urls){const code=postCode(url);if(code&&!observedSources.has(code)){report.discovered++;observedSources.set(code,url);}}
     report.profileRead=urls.length>0;
+    if(!report.profileRead){report.profileTitle=await page.title();report.profileMessage=(await page.locator('body').innerText()).slice(0,800);}
   }
   if(!report.profileRead)report.failures.push({post:'profile',reason:'Perfil público indisponível ou exigiu login; novas publicações não puderam ser descobertas.'});
   // Recheck active stock even when profile discovery is temporarily unavailable.
@@ -57,11 +61,13 @@ try{
       const product=parsed.product;
       const captionHash=hash(dom.caption);
       if(prior&&state[code]?.captionHash===captionHash&&prior.images.length){continue;}
-      if(prior?.images.length&&(!dom.count||dom.count===prior.images.length+(state[code]?.videos||0))){
+      if(prior?.images.length){
         const candidate={...product,id:prior.id,description:prior.description||product.description,images:prior.images};
         if(JSON.stringify({...candidate,collectedAt:null})!==JSON.stringify({...prior,collectedAt:null}))updates.push(candidate);
         state[code]={captionHash,photos:prior.images.length,videos:state[code]?.videos||0};continue;
       }
+      await page.waitForFunction(()=>[...document.querySelectorAll('main img,article img')].some(img=>img.naturalWidth>=300),null,{timeout:10000}).catch(()=>{});
+      dom=await page.evaluate(readPostDom,code);
       const photos=new Map(dom.photos.map(photo=>[photo.position,photo.url]));
       const videoPositions=new Set(dom.videoPositions||[]);
       let moves=0;

@@ -1,6 +1,6 @@
 # Vavau Motos
 
-Site estático em React, TypeScript e Vite. Catálogo de motos, filtros, favoritos neste dispositivo, galerias completas, entregas de clientes e contato com a loja. Sem banco de dados, área administrativa, senha de Instagram ou segredo no navegador.
+Site estático em React, TypeScript e Vite. Catálogo de motos, filtros, favoritos neste dispositivo, galerias completas, entregas de clientes e contato com a loja. Sem banco de dados ou senha de Instagram. A área da equipe usa uma função no Vercel para autenticar e gravar fotos e JSON no GitHub; os segredos ficam no servidor.
 
 ## Desenvolvimento e migração
 
@@ -72,4 +72,33 @@ Confira `data/sync-report.json` e as alterações antes de um envio manual. Esse
 
 A publicação no Pages foi concluída. A execução completa leu 75 publicações conhecidas e conferiu as 29 motos do estoque, reaproveitando suas galerias. O acesso ao perfil foi redirecionado para `/accounts/login/`; por isso a descoberta de novas publicações está bloqueada nesse ambiente. Dois reels também não forneceram mídia/data suficientes e foram preservados fora do catálogo.
 
-A rotina diária permanece habilitada para reconferir os anúncios conhecidos. Sua execução sinaliza falha enquanto a descoberta pelo perfil não estiver disponível. A publicação de atualizações verificadas pode concluir mesmo com essa falha parcial. Cadastro de novas motos ainda exige acrescentar o link à lista de fontes ou editar os dados manualmente. O administrador com cadastro manual foi proposto e ainda não foi implementado.
+A rotina diária permanece habilitada para reconferir os anúncios conhecidos. Sua execução sinaliza falha enquanto a descoberta pelo perfil não estiver disponível. A publicação de atualizações verificadas pode concluir mesmo com essa falha parcial. Cadastro de novas motos ainda exige acrescentar o link à lista de fontes ou editar os dados manualmente. O administrador permite fazer esses cadastros manualmente quando a leitura pública estiver bloqueada.
+
+## Administração no Vercel
+
+Abra `/admin`. O painel permite cadastrar motos e entregas, enviar até 30 fotos por cadastro, reorganizar a galeria, ajustar preço/quilometragem, escolher destaque, trabalhar em rascunho e marcar uma moto como vendida. Não há checkout. Acesso em `Meu acesso` permite alterar login e senha, exigindo a senha atual.
+
+A Vercel executa apenas `api/admin.ts`; o frontend continua estático. Configure no projeto, em Production e Preview:
+
+| Variável | Uso |
+| --- | --- |
+| `ADMIN_INITIAL_USERNAME` | Login inicial |
+| `ADMIN_INITIAL_PASSWORD_HASH` | Hash scrypt da senha inicial, nunca a senha em texto |
+| `ADMIN_SESSION_SECRET` | Segredo aleatório do servidor, com pelo menos 32 caracteres |
+| `GITHUB_REPOSITORY` | `Benfic4rthur/Vavau-Motors` |
+| `GITHUB_BRANCH` | `main` |
+| `GITHUB_WRITE_TOKEN` | Fine-grained PAT apenas deste repositório, Contents: Read and write |
+
+Para gerar um hash de outra senha, use `passwordHash` em `server/security.mjs` em um script local que leia a senha sem publicá-la. Nunca use prefixo `VITE_` em segredos. Não envie `.env.local`, arquivos `*.local.txt` ou a pasta `work/` ao GitHub. O arquivo local de acesso é ignorado pelo Git.
+
+Cada foto é convertida no navegador para WebP (até 1600 px) e enviada separadamente ao servidor. A função exige sessão válida e envia o blob ao GitHub. Ao salvar, um único commit inclui fotos, `data/catalog.json`, o catálogo público e as correções manuais. Se houver alteração concorrente, o painel pede atualização e não força o histórico. Blobs de uploads interrompidos não são vinculados à árvore do repositório.
+
+A vitrine consulta o catálogo atualizado pela função pública, inclusive quando estiver hospedada no Pages, sem precisar executar Actions a cada edição. Os arquivos estáticos do site são recompilados pelo deploy normal da Vercel. A rotina diária no GitHub continua sendo o único workflow próprio.
+
+Login usa cookie HttpOnly, Secure em HTTPS, SameSite Strict e validade de duas horas. Alterações de acesso ficam em `data/admin-auth.enc.json`, cifradas com AES-GCM; a chave fica somente na Vercel. Uma troca invalida sessões anteriores. Há proteção de origem nos POSTs e limite básico de tentativas por instância; não é um bloqueio distribuído. Mantenha um token limitado ao repositório e renove-o antes de expirar.
+
+Se a autorização do GitHub ainda não estiver configurada, o login funciona em modo de leitura e as gravações ficam desabilitadas. Nada é publicado de mentirinha.
+
+Para migração, leve o repositório e configure as mesmas variáveis no novo backend Node. Preserve o `ADMIN_SESSION_SECRET` para ler o acesso cifrado já salvo ou recupere o acesso removendo o arquivo cifrado em um commit autorizado e configurando novos valores iniciais. `site.config.json` informa os endereços públicos da API e do admin.
+
+Em desenvolvimento, `.env.local` habilita um adaptador isolado: mudanças ficam em `work/admin-local/`, sem gravar no catálogo real ou no GitHub. Os testes verificam autenticação, origem, sessão, troca de acesso cifrada, fotos, estados públicos e conflitos de commit.

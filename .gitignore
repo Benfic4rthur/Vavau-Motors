@@ -10,3 +10,5 @@ work/
 
 data/sync-report.json
 *.tmp
+.vercel/
+*.local.txt

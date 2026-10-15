@@ -76,9 +76,9 @@ A rotina diária permanece habilitada para reconferir os anúncios conhecidos. S
 
 ## Administração no Vercel
 
-Abra `/admin`. O painel permite cadastrar motos e entregas, enviar até 30 fotos por cadastro, reorganizar a galeria, ajustar preço/quilometragem, escolher destaque, trabalhar em rascunho e marcar uma moto como vendida. Não há checkout. Acesso em `Meu acesso` permite alterar login e senha, exigindo a senha atual.
+A vitrine está em https://vavau-motos.vercel.app/ e o painel em https://vavau-motos.vercel.app/admin. Abra `/admin`. O painel permite cadastrar motos e entregas, enviar até 30 fotos por cadastro, reorganizar a galeria, ajustar preço/quilometragem, escolher destaque, trabalhar em rascunho e marcar uma moto como vendida. Não há checkout. Acesso em `Meu acesso` permite alterar login e senha, exigindo a senha atual.
 
-A Vercel executa apenas `api/admin.ts`; o frontend continua estático. Configure no projeto, em Production e Preview:
+A Vercel executa apenas `api/admin.ts`; o frontend continua estático. Configure no projeto em Production (repita em Preview se precisar de um ambiente de testes com gravação):
 
 | Variável | Uso |
 | --- | --- |
@@ -95,7 +95,7 @@ Cada foto é convertida no navegador para WebP (até 1600 px) e enviada separada
 
 A vitrine consulta o catálogo atualizado pela função pública, inclusive quando estiver hospedada no Pages, sem precisar executar Actions a cada edição. Os arquivos estáticos do site são recompilados pelo deploy normal da Vercel. A rotina diária no GitHub continua sendo o único workflow próprio.
 
-Login usa cookie HttpOnly, Secure em HTTPS, SameSite Strict e validade de duas horas. Alterações de acesso ficam em `data/admin-auth.enc.json`, cifradas com AES-GCM; a chave fica somente na Vercel. Uma troca invalida sessões anteriores. Há proteção de origem nos POSTs e limite básico de tentativas por instância; não é um bloqueio distribuído. Mantenha um token limitado ao repositório e renove-o antes de expirar.
+Login usa cookie HttpOnly, Secure em HTTPS, SameSite Strict e validade de duas horas. Alterações de acesso ficam em `data/admin-auth.enc.json`, cifradas com AES-GCM; a chave fica somente na Vercel. Uma troca invalida sessões anteriores. Há proteção de origem nos POSTs e limite básico de tentativas por instância; não é um bloqueio distribuído. Mantenha um token limitado ao repositório e renove-o antes de expirar. A chave deste projeto foi autorizada até **15/10/2027**, com Contents leitura/gravação e Metadata leitura apenas para este repositório; a Vercel a armazena como Secret em Production. O projeto usa Hobby; não foi ativado plano pago ou integração de armazenamento cobrada.
 
 Se a autorização do GitHub ainda não estiver configurada, o login funciona em modo de leitura e as gravações ficam desabilitadas. Nada é publicado de mentirinha.
 

@@ -29,8 +29,9 @@
       ],
       "description": "GSX 1300 R Hayabusa 2013. cor azul. 45.047 km anunciados.",
       "features": [],
-      "featured": false,
-      "sourceDate": "2026-08-26T15:39:36.000Z"
+      "featured": true,
+      "sourceDate": "2026-08-26T15:39:36.000Z",
+      "coverTone": ""
     },
     "DaoHvnXgZy_": {
       "name": "Yamaha FZ15 Fazer ABS 2024",
@@ -124,7 +125,7 @@
         "Manual do proprietário",
         "Chave reserva"
       ],
-      "featured": true,
+      "featured": false,
       "sourceDate": "2026-10-14T20:27:02.000Z",
       "coverTone": ""
     }

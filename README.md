@@ -42,37 +42,13 @@ Para correções, use o ID do registro em `data/overrides.json`:
 }
 ```
 
-As correções passam a valer na próxima sincronização. Para manutenção manual, edite `data/catalog.json` e gere/publique outra versão. Valores e disponibilidade devem ser confirmados com a loja.
+O painel aplica as correções diretamente ao salvar. Para manutenção pelo código, edite `data/catalog.json` e gere/publique outra versão. Valores e disponibilidade devem ser confirmados com a loja.
 
-## Importador público e rotina diária
+## Atualizações do catálogo
 
-Há um único workflow próprio, `Atualizar catálogo`, com agendamento diário às **07h23 de Brasília** (10h23 UTC), limite de 10 minutos e acionamento manual pelo botão Run workflow. O GitHub pode atrasar o agendamento. Não há execução automática a cada push. A variável de repositório `SYNC_ENABLED=true` habilita o agendamento; a chamada manual funciona mesmo sem ela. `PAGES_ENABLED=true` habilita publicação pelo workflow.
+As motos e as entregas são atualizadas manualmente pelo painel no Vercel. A rotina diária foi desabilitada e o arquivo de workflow foi removido a pedido do proprietário. Este projeto não usa GitHub Actions para cadastro, upload ou publicação da Vercel.
 
-O importador usa páginas públicas, sem login, cookies pessoais, API da Meta ou tentativa de contornar bloqueios. Reconfere estoque ativo e procura novidades no perfil. Uma moto só entra automaticamente com disponibilidade explícita e campos reconhecidos. Uma legenda marcada como vendida retira a moto; entrega explícita entra nas histórias. Posts fora do escopo são ignorados.
-
-O padrão de legenda reconhecido é `Marca:`, `Modelo:`, `Ano:`, `Cor:`, `Potência:`, `Quilometragem:` e `R$`. Podem usar `Tipo: moto` ou `#vavaumoto`, e `Tipo: entrega` ou `#vavaucliente`. O `#destaque` só produz efeito após uma importação e publicação bem-sucedidas.
-
-**Limite:** o Instagram pode exigir login ou restringir a leitura pública, inclusive por origem do acesso. Sem confirmar autor, data original ou galeria completa, o importador preserva o registro anterior e registra a falha. Não interpreta falha ou desaparecimento de post como venda. Após três falhas seguidas, interrompe a execução. A rotina não faz novas tentativas automáticas em sequência. A integração depende do acesso público permanecer disponível.
-
-Só há novo build/publicação quando o catálogo muda ou quando `Publicar mesmo sem alterações` é solicitado manualmente. Usa o token temporário do próprio GitHub, restrito a esse repositório, para commits e publicação; não precisa salvar PAT nem login da loja. Relatórios vão ao resumo da execução; nenhum dado de login é coletado.
-
-Para rodar o importador fora do GitHub:
-
-```sh
-npx playwright install chromium
-npm run sync
-npm run check
-npm test
-npm run build:pages
-```
-
-Confira `data/sync-report.json` e as alterações antes de um envio manual. Esse relatório local não é versionado. O estado de coleta permite reutilizar fotos já verificadas. Fotos de vídeos não são importadas como se fossem fotos do carrossel.
-
-### Resultado do teste em 15/10/2026
-
-A publicação no Pages foi concluída. A execução completa leu 75 publicações conhecidas e conferiu as 29 motos do estoque, reaproveitando suas galerias. O acesso ao perfil foi redirecionado para `/accounts/login/`; por isso a descoberta de novas publicações está bloqueada nesse ambiente. Dois reels também não forneceram mídia/data suficientes e foram preservados fora do catálogo.
-
-A rotina diária permanece habilitada para reconferir os anúncios conhecidos. Sua execução sinaliza falha enquanto a descoberta pelo perfil não estiver disponível. A publicação de atualizações verificadas pode concluir mesmo com essa falha parcial. Cadastro de novas motos ainda exige acrescentar o link à lista de fontes ou editar os dados manualmente. O administrador permite fazer esses cadastros manualmente quando a leitura pública estiver bloqueada.
+Os scripts de importação pública permanecem no código apenas como ferramentas locais opcionais de manutenção. Não são executados automaticamente. O Instagram pode exigir login ou restringir leitura; ele não é a fonte automática do site.
 
 ## Administração no Vercel
 
@@ -93,7 +69,7 @@ Para gerar um hash de outra senha, use `passwordHash` em `server/security.mjs` e
 
 Cada foto é convertida no navegador para WebP (até 1600 px) e enviada separadamente ao servidor. A função exige sessão válida e envia o blob ao GitHub. Ao salvar, um único commit inclui fotos, `data/catalog.json`, o catálogo público e as correções manuais. Se houver alteração concorrente, o painel pede atualização e não força o histórico. Blobs de uploads interrompidos não são vinculados à árvore do repositório.
 
-A vitrine consulta o catálogo atualizado pela função pública, inclusive quando estiver hospedada no Pages, sem precisar executar Actions a cada edição. Os arquivos estáticos do site são recompilados pelo deploy normal da Vercel. A rotina diária no GitHub continua sendo o único workflow próprio.
+A vitrine consulta o catálogo atualizado pela função pública, inclusive quando estiver hospedada no Pages, sem precisar executar Actions a cada edição. Os arquivos estáticos do site são recompilados pelo deploy normal da Vercel. Não há workflow agendado ou GitHub Action próprio ativo.
 
 Login usa cookie HttpOnly, Secure em HTTPS, SameSite Strict e validade de duas horas. Alterações de acesso ficam em `data/admin-auth.enc.json`, cifradas com AES-GCM; a chave fica somente na Vercel. Uma troca invalida sessões anteriores. Há proteção de origem nos POSTs e limite básico de tentativas por instância; não é um bloqueio distribuído. Mantenha um token limitado ao repositório e renove-o antes de expirar. A chave deste projeto foi autorizada até **15/10/2027**, com Contents leitura/gravação e Metadata leitura apenas para este repositório; a Vercel a armazena como Secret em Production. O projeto usa Hobby; não foi ativado plano pago ou integração de armazenamento cobrada.
 

@@ -1,0 +1,12 @@
+node_modules/
+dist-static/
+.DS_Store
+.env*
+.dev.vars*
+ACESSO-INICIAL.txt
+*.log
+*.tsbuildinfo
+work/
+
+data/sync-report.json
+*.tmp

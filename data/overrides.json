@@ -89,8 +89,9 @@
       ],
       "description": "Biz 125 ES 2008. cor cinza. 21.374 km anunciados.",
       "features": [],
-      "featured": false,
-      "sourceDate": "2026-08-21T20:08:50.000Z"
+      "featured": true,
+      "sourceDate": "2026-08-21T20:08:50.000Z",
+      "coverTone": ""
     },
     "DefPV6igYpZ": {
       "name": "Triumph Street Scrambler 900 ABS 2020",
@@ -123,7 +124,7 @@
         "Manual do proprietário",
         "Chave reserva"
       ],
-      "featured": true,
+      "featured": false,
       "sourceDate": "2026-10-14T20:27:02.000Z"
     }
   },

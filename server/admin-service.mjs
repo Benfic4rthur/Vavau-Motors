@@ -46,7 +46,7 @@ export function createAdminService(env,store=new GitHubStore(env)){
    }
    if(action==='save'&&request.method==='POST'){
     const body=await request.json();const product=productSchema.parse(body.product);if(!['moto','cliente'].includes(product.kind))throw new StoreError('Tipo de cadastro inválido.',400);
-    if(product.status==='available'&&product.kind==='cliente'&&(!product.customerName||!product.model))throw new StoreError('Para publicar uma entrega, informe o nome do cliente e a moto entregue.',400);
+    if(product.status==='available'&&product.kind==='cliente'&&(!product.customerName||!product.model||!product.brand))throw new StoreError('Para publicar uma entrega, informe o nome do cliente, a marca e a moto entregue.',400);
     if(product.status==='available'&&(!product.images.length||(product.kind==='moto'&&(!product.model||!product.brand))))throw new StoreError('Para publicar, adicione uma foto, marca e modelo da moto.',400);
     if(product.kind==='cliente'){product.price=null;product.featured=false;}
     if(!product.sourceDate)product.sourceDate=new Date().toISOString();product.collectedAt=date();

@@ -52,7 +52,7 @@ Os scripts de importação pública permanecem no código apenas como ferramenta
 
 ## Administração no Vercel
 
-A vitrine está em https://vavau-motos.vercel.app/ e o painel em https://vavau-motos.vercel.app/admin. Abra `/admin`. O painel permite cadastrar motos e entregas, enviar até 30 fotos por cadastro, reorganizar a galeria, informar o nome do cliente e a moto entregue nas histórias, ajustar preço/quilometragem, escolher destaque, trabalhar em rascunho e marcar uma moto como vendida. Não há checkout. Acesso em `Meu acesso` permite alterar login e senha, exigindo a senha atual.
+A vitrine está em https://vavau-motos.vercel.app/ e o painel em https://vavau-motos.vercel.app/admin. Abra `/admin`. O painel permite cadastrar motos e entregas, enviar até 30 fotos por cadastro, reorganizar a galeria, informar o nome do cliente e a moto entregue nas histórias, selecionar entre 21 marcas com logo associado, ajustar preço/quilometragem, escolher destaque, trabalhar em rascunho e marcar uma moto como vendida. Não há checkout. Acesso em `Meu acesso` permite alterar login e senha, exigindo a senha atual.
 
 A Vercel executa apenas `api/admin.ts`; o frontend continua estático. Configure no projeto em Production (repita em Preview se precisar de um ambiente de testes com gravação):
 
@@ -82,3 +82,9 @@ Em desenvolvimento, `.env.local` habilita um adaptador isolado: mudanças ficam 
 ### Verificação do painel em 15/10/2026
 
 Os 19 testes automatizados, a checagem TypeScript e o build passaram. Na produção, o login com cookie HttpOnly, o carregamento dos 36 cadastros e a conexão de gravação foram verificados. Um upload real enviou uma foto WebP, criou um rascunho em um único commit e confirmou a foto no GitHub. O endpoint público manteve os 36 registros publicados e excluiu o rascunho. O commit do teste foi revertido, removendo o cadastro temporário e sua foto da versão atual.
+
+### Marcas e imagens
+
+Os dois formulários usam o mesmo seletor de 21 marcas, com prévia do logo e opção para outra marca. Os arquivos originais dos logos ficam em `public/assets/brands/`; a procedência de cada arquivo está em `sources.json` nessa pasta. A maioria vem dos sites dos fabricantes; BMW e Vespa usam os arquivos vetoriais da Simple Icons (CC0). Os logos são imagens reais, sem desenho em CSS ou geração por IA.
+
+Nas histórias, a marca selecionada determina o logo. As fotos do catálogo abrem a ficha da moto; setas e indicadores continuam navegando apenas na galeria.

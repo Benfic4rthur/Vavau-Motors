@@ -1,0 +1,110 @@
+[
+  {
+    "file": "yamaha.png",
+    "source": "https://stgmkpeus.blob.core.windows.net/yamaha-motor-strapi/uploads/Yamaha_Logo_ca94f18b06.png",
+    "contentType": "image/png"
+  },
+  {
+    "file": "triumph.svg",
+    "source": "https://media.triumphmotorcycles.co.uk/image/upload/f_auto/q_auto:eco/sitecoremedialibrary/media-library/misc/misc-images/logo.svg?la=pt-BR&hash=8E0830D079547EBF6B7A1329A36741F46117EB77",
+    "contentType": "image/svg+xml"
+  },
+  {
+    "file": "ducati.png",
+    "source": "https://images.ctfassets.net/x7j9qwvpvr5s/6a1aCcEbeW5UqVEVXOXCad/d976b1d6ea14816ffd3039334f7665ba/ducati_id.png",
+    "contentType": "image/png"
+  },
+  {
+    "file": "kawasaki.png",
+    "source": "https://www.kawasakibrasil.com/pt_br/_jcr_content/root/header/logo.coreimg.png/1749715496038/new-vi-logo.png",
+    "contentType": "image/png"
+  },
+  {
+    "file": "royal-enfield.svg",
+    "source": "https://www.royalenfield.com/content/dam/royal-enfield/brazil/logos/logo.svg",
+    "contentType": "image/svg+xml"
+  },
+  {
+    "file": "harley-davidson.svg",
+    "source": "https://www.harley-davidson.com/ctfasset/5vy1mse9fkav/78rzR89t28gPHAepqNx7kS/19da21b034998035d965b9fbf3009739/shield-icon-black-nav.svg",
+    "contentType": "image/svg+xml"
+  },
+  {
+    "file": "shineray.png",
+    "source": "https://www.shineray.com.br/wp-content/uploads/2023/04/logo_shineray_final.png",
+    "contentType": "image/png"
+  },
+  {
+    "file": "dafra.svg",
+    "source": "https://daframotos.com.br/wp-content/uploads/2022/06/dafra-motos-brasil-logo-branco.svg",
+    "contentType": "image/svg+xml"
+  },
+  {
+    "file": "suzuki.svg",
+    "source": "https://haojuemotos.com.br/images/brands/logo_suzuki.svg",
+    "contentType": "image/svg+xml"
+  },
+  {
+    "file": "haojue.png",
+    "source": "https://haojuemotos.com.br/images/brands/logo_haojue.png",
+    "contentType": "image/png"
+  },
+  {
+    "file": "zontes.png",
+    "source": "https://zontesmotos.com.br/images/brands/logo_zontes-v2.png",
+    "contentType": "image/png"
+  },
+  {
+    "file": "kymco.png",
+    "source": "https://kymcomotos.com.br/images/kymco/logo.png",
+    "contentType": "image/png"
+  },
+  {
+    "file": "sym.webp",
+    "source": "https://daframotos.com.br/wp-content/uploads/2025/01/sym-dafra-motos-brasil-logo-sym-2024.webp",
+    "contentType": "image/webp"
+  },
+  {
+    "file": "honda.svg",
+    "source": "https://www.honda.com.br/motos/sites/hda/themes/hondahda/assets/img/honda-horizontal.svg",
+    "contentType": "image/svg+xml",
+    "note": "SVG original salvo pelo navegador."
+  },
+  {
+    "file": "ktm.jpg",
+    "source": "https://www.ktm.com/content/dam/websites/ktm-com/language-masters/en/logo/37860_KTM_LogoPodium_orange_RGB.jpg",
+    "contentType": "image/jpeg"
+  },
+  {
+    "file": "husqvarna.png",
+    "source": "https://www.husqvarna-motorcycles.com/content/dam/websites/husqvarna-motorcycles-com/language-masters/en/logo/Husqvarna_Logo_1048x1048.png",
+    "contentType": "image/png"
+  },
+  {
+    "file": "bmw.svg",
+    "source": "https://github.com/simple-icons/simple-icons/blob/16.35.0/icons/bmw.svg",
+    "contentType": "image/svg+xml",
+    "note": "Arquivo vetorial da marca, preservado sem redesenhar. Simple Icons, CC0."
+  },
+  {
+    "file": "vespa.svg",
+    "source": "https://github.com/simple-icons/simple-icons/blob/16.35.0/icons/vespa.svg",
+    "contentType": "image/svg+xml",
+    "note": "Arquivo vetorial da marca, preservado sem redesenhar. Simple Icons, CC0."
+  },
+  {
+    "file": "cfmoto.png",
+    "source": "https://www.cfmoto.com/content/dam/cfmoto/page-assets/home/cfmoto-logo-block.png",
+    "contentType": "image/png"
+  },
+  {
+    "file": "mottu.svg",
+    "source": "https://mottu.com.br/favicon.svg",
+    "contentType": "image/svg+xml"
+  },
+  {
+    "file": "bajaj.png",
+    "source": "https://bajaj.com.br/wp-content/themes/twentytwentyone/img/logo-bajaj.png",
+    "contentType": "image/png"
+  }
+]

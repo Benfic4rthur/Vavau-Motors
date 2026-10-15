@@ -1,0 +1,107 @@
+[
+  {
+    "name": "Bajaj",
+    "file": "bajaj.png",
+    "dark": false
+  },
+  {
+    "name": "BMW",
+    "file": "bmw.svg",
+    "dark": false
+  },
+  {
+    "name": "CFMOTO",
+    "file": "cfmoto.png",
+    "dark": false
+  },
+  {
+    "name": "Dafra",
+    "file": "dafra.svg",
+    "dark": true
+  },
+  {
+    "name": "Ducati",
+    "file": "ducati.png",
+    "dark": false
+  },
+  {
+    "name": "Haojue",
+    "file": "haojue.png",
+    "dark": false
+  },
+  {
+    "name": "Harley-Davidson",
+    "file": "harley-davidson.svg",
+    "dark": false
+  },
+  {
+    "name": "Honda",
+    "file": "honda.svg",
+    "dark": false
+  },
+  {
+    "name": "Husqvarna",
+    "file": "husqvarna.png",
+    "dark": false
+  },
+  {
+    "name": "Kawasaki",
+    "file": "kawasaki.png",
+    "dark": false
+  },
+  {
+    "name": "KTM",
+    "file": "ktm.jpg",
+    "dark": false
+  },
+  {
+    "name": "Kymco",
+    "file": "kymco.png",
+    "dark": false
+  },
+  {
+    "name": "Mottu",
+    "file": "mottu.svg",
+    "dark": false
+  },
+  {
+    "name": "Royal Enfield",
+    "file": "royal-enfield.svg",
+    "dark": false
+  },
+  {
+    "name": "Shineray",
+    "file": "shineray.png",
+    "dark": false
+  },
+  {
+    "name": "Suzuki",
+    "file": "suzuki.svg",
+    "dark": false
+  },
+  {
+    "name": "SYM",
+    "file": "sym.webp",
+    "dark": false
+  },
+  {
+    "name": "Triumph",
+    "file": "triumph.svg",
+    "dark": true
+  },
+  {
+    "name": "Vespa",
+    "file": "vespa.svg",
+    "dark": false
+  },
+  {
+    "name": "Yamaha",
+    "file": "yamaha.png",
+    "dark": false
+  },
+  {
+    "name": "Zontes",
+    "file": "zontes.png",
+    "dark": false
+  }
+]

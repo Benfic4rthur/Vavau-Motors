@@ -63,14 +63,29 @@
 .delivery-message{font-size:13px;line-height:1.8;color:#68715f;margin:20px 0}
 @media(max-width:580px){.stories .story-card h3{font-size:23px}.story-bike{font-size:11px;min-height:35px}.delivery-dialog .delivery-description{font-size:16px}}
 
-/* Keep motorcycle information readable at every catalog size. */
-.product-card .card-brand{font-size:10px}
-.product-card .card-title{font-size:17px;min-height:46px}
-.product-card .card-specs{font-size:11px;line-height:1.5;flex-wrap:wrap;row-gap:5px}
-.product-card .card-specs svg{width:15px;height:15px;flex-shrink:0}
-.story-bike{font-size:14px;min-height:45px}
+/* Give the motorcycle its own readable line under the customer's name. */
+.story-bike{font-size:15px;font-weight:500;color:#59674c;min-height:48px}
 .delivery-dialog .delivery-description{font-size:21px}
-.spec-table dt{font-size:9px}
-.spec-table dd{font-size:14px}
-@media(min-width:1600px){.product-card .card-title{font-size:19px}}
-@media(max-width:580px){.product-card .card-brand{font-size:8px}.product-card .card-title{font-size:14px;min-height:38px}.product-card .card-specs{font-size:9px;column-gap:7px}.product-card .card-specs svg{width:13px;height:13px}.story-bike{font-size:13px;min-height:42px}.delivery-dialog .delivery-description{font-size:18px}.spec-table dd{font-size:14px}}
+.gallery-open{position:absolute;inset:0;display:block;width:100%;height:100%;padding:0;cursor:pointer}
+.gallery-open>img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 78%;transition:transform .45s}
+.product-card:hover .gallery-open>img{transform:scale(1.025)}
+.gallery-arrow{padding:0;line-height:0;display:flex;align-items:center;justify-content:center}
+.gallery-arrow svg{display:block;flex-shrink:0;margin:0}
+@media(max-width:580px){.story-bike{font-size:14px;min-height:45px}.delivery-dialog .delivery-description{font-size:18px}}
+.gallery-open:focus-visible{outline:2px solid var(--gold);outline-offset:-3px}
+
+/* Brand marks are original image files, never CSS drawings. */
+.motorcycle-brand-logo{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;width:94px;height:52px;padding:10px;border:1px solid #dfe1d7;border-radius:7px;background:#fff;vertical-align:middle}
+.motorcycle-brand-logo img{display:block;width:100%;height:100%;object-fit:contain}
+.motorcycle-brand-logo.on-dark{background:#222820;border-color:#222820}
+.motorcycle-brand-logo.compact{width:58px;height:32px;padding:5px 7px;border-radius:5px}
+.card-make{display:flex;align-items:center;gap:9px}
+.card-make>.motorcycle-brand-logo+span{display:none}
+.card-brand{min-height:32px}
+.story-motorcycle{display:flex;align-items:center;gap:15px;margin:10px 0 16px;min-height:55px}
+.story-motorcycle .story-bike{flex:1;min-width:0;min-height:0;margin:0;max-width:none;font-size:15px;line-height:1.5}
+.delivery-dialog .delivery-description{display:flex;align-items:center;gap:18px}
+.storefront .hero-art{overflow:hidden}
+.storefront .hero-moto{mask-image:linear-gradient(90deg,transparent 0%,#000 20%,#000 100%)}
+@media(max-width:800px){.storefront .hero-moto{mask-image:none}}
+@media(max-width:580px){.motorcycle-brand-logo{width:78px;height:46px;padding:9px}.motorcycle-brand-logo.compact{width:49px;height:28px;padding:5px}.card-brand{min-height:28px}.story-motorcycle{gap:12px}.story-motorcycle .story-bike{font-size:14px}.delivery-dialog .delivery-description{gap:14px}}

@@ -51,10 +51,11 @@ test('delivery editing preserves customer and motorcycle, requires both to publi
  const product=productSchema.parse({id:'delivery',kind:'cliente',name:'Nova entrega',category:'Entrega',status:'draft',images:['/assets/client-example.webp']});
  assert.equal((await request('save',{product,uploads:[],revision:'r0'},cookie)).status,200);
  assert.equal((await request('save',{product:{...product,status:'available'},uploads:[],revision:'r1'},cookie)).status,400);
- const published={...product,status:'available',customerName:'Anderson e Daniele',model:'Honda Biz 125 EX 2012',name:'Anderson e Daniele · Honda Biz 125 EX 2012',price:100,featured:true};
+ const published={...product,status:'available',customerName:'Anderson e Daniele',brand:'Honda',model:'Honda Biz 125 EX 2012',name:'Anderson e Daniele · Honda Biz 125 EX 2012',price:100,featured:true};
+ assert.equal((await request('save',{product:{...published,brand:''},uploads:[],revision:'r1'},cookie)).status,400);
  assert.equal((await request('save',{product:published,uploads:[],revision:'r1'},cookie)).status,200);
  const [delivery]=await (await request('public')).json();
- assert.equal(delivery.customerName,'Anderson e Daniele');assert.equal(delivery.model,'Honda Biz 125 EX 2012');
+ assert.equal(delivery.brand,'Honda');assert.equal(delivery.customerName,'Anderson e Daniele');assert.equal(delivery.model,'Honda Biz 125 EX 2012');
  assert.equal(delivery.price,null);assert.equal(store.products[0].featured,false);
 });
 test('changing access encrypts the hash and invalidates previous sessions',async()=>{

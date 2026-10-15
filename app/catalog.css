@@ -62,3 +62,15 @@
 .delivery-dialog .delivery-description{font-size:18px;color:#8c7138;border-top:1px solid var(--line);padding-top:22px;margin-top:26px}
 .delivery-message{font-size:13px;line-height:1.8;color:#68715f;margin:20px 0}
 @media(max-width:580px){.stories .story-card h3{font-size:23px}.story-bike{font-size:11px;min-height:35px}.delivery-dialog .delivery-description{font-size:16px}}
+
+/* Keep motorcycle information readable at every catalog size. */
+.product-card .card-brand{font-size:10px}
+.product-card .card-title{font-size:17px;min-height:46px}
+.product-card .card-specs{font-size:11px;line-height:1.5;flex-wrap:wrap;row-gap:5px}
+.product-card .card-specs svg{width:15px;height:15px;flex-shrink:0}
+.story-bike{font-size:14px;min-height:45px}
+.delivery-dialog .delivery-description{font-size:21px}
+.spec-table dt{font-size:9px}
+.spec-table dd{font-size:14px}
+@media(min-width:1600px){.product-card .card-title{font-size:19px}}
+@media(max-width:580px){.product-card .card-brand{font-size:8px}.product-card .card-title{font-size:14px;min-height:38px}.product-card .card-specs{font-size:9px;column-gap:7px}.product-card .card-specs svg{width:13px;height:13px}.story-bike{font-size:13px;min-height:42px}.delivery-dialog .delivery-description{font-size:18px}.spec-table dd{font-size:14px}}

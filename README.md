@@ -67,3 +67,9 @@ npm run build:pages
 ```
 
 Confira `data/sync-report.json` e as alterações antes de um envio manual. Esse relatório local não é versionado. O estado de coleta permite reutilizar fotos já verificadas. Fotos de vídeos não são importadas como se fossem fotos do carrossel.
+
+### Resultado do teste em 15/10/2026
+
+A publicação no Pages foi concluída. A execução completa leu 75 publicações conhecidas e conferiu as 29 motos do estoque, reaproveitando suas galerias. O acesso ao perfil foi redirecionado para `/accounts/login/`; por isso a descoberta de novas publicações está bloqueada nesse ambiente. Dois reels também não forneceram mídia/data suficientes e foram preservados fora do catálogo.
+
+A rotina diária permanece habilitada para reconferir os anúncios conhecidos. Sua execução sinaliza falha enquanto a descoberta pelo perfil não estiver disponível. A publicação de atualizações verificadas pode concluir mesmo com essa falha parcial. Cadastro de novas motos ainda exige acrescentar o link à lista de fontes ou editar os dados manualmente. O administrador com cadastro manual foi proposto e ainda não foi implementado.

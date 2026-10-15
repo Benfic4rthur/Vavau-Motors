@@ -31,6 +31,38 @@
       "features": [],
       "featured": true,
       "sourceDate": "2026-08-26T15:39:36.000Z"
+    },
+    "DaoHvnXgZy_": {
+      "name": "Yamaha FZ15 Fazer ABS 2024",
+      "customerName": "",
+      "brand": "Yamaha",
+      "model": "FZ15 Fazer ABS",
+      "category": "Street",
+      "year": 2024,
+      "manufactureYear": 2023,
+      "km": 22952,
+      "price": 20900,
+      "color": "Vermelha",
+      "engineCc": 149,
+      "horsepower": 12.4,
+      "images": [
+        "/assets/moto-yamaha-fz15-fazer-abs-2024-01.webp",
+        "/assets/moto-yamaha-fz15-fazer-abs-2024-02.webp",
+        "/assets/moto-yamaha-fz15-fazer-abs-2024-03.webp",
+        "/assets/moto-yamaha-fz15-fazer-abs-2024-04.webp",
+        "/assets/moto-yamaha-fz15-fazer-abs-2024-05.webp",
+        "/assets/moto-yamaha-fz15-fazer-abs-2024-06.webp",
+        "/assets/moto-yamaha-fz15-fazer-abs-2024-07.webp",
+        "/assets/moto-yamaha-fz15-fazer-abs-2024-08.webp",
+        "/assets/moto-yamaha-fz15-fazer-abs-2024-09.webp"
+      ],
+      "description": "Possui manual e chave reserva.",
+      "features": [
+        "Manual do proprietário",
+        "Chave reserva"
+      ],
+      "featured": true,
+      "sourceDate": "2026-07-10T21:08:14.000Z"
     }
   },
   "ignorePosts": []

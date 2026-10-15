@@ -1,5 +1,42 @@
 [
   {
+    "id": "DaoHvnXgZy_",
+    "kind": "moto",
+    "name": "Yamaha FZ15 Fazer ABS 2024",
+    "customerName": "",
+    "brand": "Yamaha",
+    "model": "FZ15 Fazer ABS",
+    "category": "Street",
+    "year": 2024,
+    "manufactureYear": 2023,
+    "km": 22952,
+    "price": 20900,
+    "color": "Vermelha",
+    "engineCc": 149,
+    "horsepower": 12.4,
+    "images": [
+      "/assets/moto-yamaha-fz15-fazer-abs-2024-01.webp",
+      "/assets/moto-yamaha-fz15-fazer-abs-2024-02.webp",
+      "/assets/moto-yamaha-fz15-fazer-abs-2024-03.webp",
+      "/assets/moto-yamaha-fz15-fazer-abs-2024-04.webp",
+      "/assets/moto-yamaha-fz15-fazer-abs-2024-05.webp",
+      "/assets/moto-yamaha-fz15-fazer-abs-2024-06.webp",
+      "/assets/moto-yamaha-fz15-fazer-abs-2024-07.webp",
+      "/assets/moto-yamaha-fz15-fazer-abs-2024-08.webp",
+      "/assets/moto-yamaha-fz15-fazer-abs-2024-09.webp"
+    ],
+    "source": "https://www.instagram.com/p/DaoHvnXgZy_/",
+    "description": "Possui manual e chave reserva.",
+    "features": [
+      "Manual do proprietário",
+      "Chave reserva"
+    ],
+    "status": "available",
+    "featured": true,
+    "sourceDate": "2026-07-10T21:08:14.000Z",
+    "collectedAt": "2026-10-15"
+  },
+  {
     "id": "DcgjfwOFhMT",
     "kind": "moto",
     "name": "Suzuki GSX 1300 R Hayabusa 2013",
@@ -345,42 +382,6 @@
     "status": "available",
     "featured": false,
     "sourceDate": "2026-07-15T14:47:06.000Z",
-    "collectedAt": "2026-10-15"
-  },
-  {
-    "id": "DaoHvnXgZy_",
-    "kind": "moto",
-    "name": "Yamaha FZ15 Fazer ABS 2024",
-    "brand": "Yamaha",
-    "model": "FZ15 Fazer ABS",
-    "year": 2024,
-    "manufactureYear": 2023,
-    "km": 22952,
-    "price": 20900,
-    "color": "Vermelha",
-    "category": "Street",
-    "engineCc": 149,
-    "horsepower": 12.4,
-    "images": [
-      "/assets/moto-yamaha-fz15-fazer-abs-2024-01.webp",
-      "/assets/moto-yamaha-fz15-fazer-abs-2024-02.webp",
-      "/assets/moto-yamaha-fz15-fazer-abs-2024-03.webp",
-      "/assets/moto-yamaha-fz15-fazer-abs-2024-04.webp",
-      "/assets/moto-yamaha-fz15-fazer-abs-2024-05.webp",
-      "/assets/moto-yamaha-fz15-fazer-abs-2024-06.webp",
-      "/assets/moto-yamaha-fz15-fazer-abs-2024-07.webp",
-      "/assets/moto-yamaha-fz15-fazer-abs-2024-08.webp",
-      "/assets/moto-yamaha-fz15-fazer-abs-2024-09.webp"
-    ],
-    "source": "https://www.instagram.com/p/DaoHvnXgZy_/",
-    "description": "Possui manual e chave reserva.",
-    "features": [
-      "Manual do proprietário",
-      "Chave reserva"
-    ],
-    "status": "available",
-    "featured": false,
-    "sourceDate": "2026-07-10T21:08:14.000Z",
     "collectedAt": "2026-10-15"
   },
   {

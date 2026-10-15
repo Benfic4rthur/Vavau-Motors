@@ -2,6 +2,6 @@
   "repository": "Benfic4rthur/Vavau-Motors",
   "storeName": "Vavau Motos",
   "whatsapp": "555135275221",
-  "adminUrl": "",
-  "catalogUrl": ""
+  "adminUrl": "https://vavau-motos.vercel.app/admin",
+  "catalogUrl": "https://vavau-motos.vercel.app/api/admin?action=public"
 }

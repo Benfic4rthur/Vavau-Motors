@@ -1,5 +1,4 @@
 import {randomUUID} from 'node:crypto';
-import {productSchema} from '../app/lib/product.ts';
 import {GitHubStore,StoreError} from './github-store.mjs';
 import {passwordHash,verifyPassword,signSession,verifySession,encryptProfile,decryptProfile,versionFor} from './security.mjs';
 const COOKIE='vavau_admin';
@@ -7,7 +6,7 @@ const attempts=new Map();
 const date=()=>new Date().toLocaleDateString('en-CA',{timeZone:'America/Sao_Paulo'});
 const noCache={'Cache-Control':'no-store','X-Content-Type-Options':'nosniff'};
 const reply=(data,status=200,headers={})=>new Response(JSON.stringify(data),{status,headers:{'Content-Type':'application/json; charset=utf-8',...noCache,...headers}});
-export function createAdminService(env,store=new GitHubStore(env)){
+export function createAdminService(env,store=new GitHubStore(env),productSchema){
  const secret=env.ADMIN_SESSION_SECRET;
  async function profile(){if(!secret||secret.length<32||!env.ADMIN_INITIAL_PASSWORD_HASH||!env.ADMIN_INITIAL_USERNAME)throw new StoreError('O acesso da equipe ainda está sendo configurado.',503);const encrypted=await store.readAuth();return encrypted?decryptProfile(encrypted,secret):{username:env.ADMIN_INITIAL_USERNAME,passwordHash:env.ADMIN_INITIAL_PASSWORD_HASH,version:versionFor(env.ADMIN_INITIAL_PASSWORD_HASH)};}
  return async function handle(request){

@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile,access} from 'node:fs/promises';
 import {parsePost,parseMoney,mergeProducts} from '../scripts/catalog-parser.mjs';
-import {chooseCover,productSchema} from '../app/lib/product.ts';
+import {chooseCover,productSchema,whatsapp} from '../app/lib/product.ts';
 import {themeForColor} from '../app/lib/theme.ts';
 
 const source='https://www.instagram.com/p/DefPV6igYpZ/';
@@ -83,4 +83,17 @@ test('published seed is validated, contains only current-scope records and every
     assert.ok(p.images.length>0);
     for(const image of p.images){assert.ok(image.startsWith('/assets/'));await access('public'+image);}
   }
+});
+
+
+test('motorcycle WhatsApp link prepares a concise enquiry with the Instagram post, and falls back to the site for manual records',()=>{
+ const product=productSchema.parse({...current,images:['/assets/moto.webp']});
+ const url=new URL(whatsapp(product,undefined,'https://loja.example/catalogo/'));
+ assert.equal(url.origin,'https://wa.me');assert.equal(url.pathname,'/555135275221');assert.deepEqual([...url.searchParams.keys()],['text']);
+ const text=url.searchParams.get('text');
+ assert.equal(text,`Olá, Vavau! Tenho interesse na Triumph Street Scrambler 900 ABS 2020 (R$ 42.900). Ela ainda está disponível?\n\n${source}`);
+ const manual=productSchema.parse({id:'manual-bike',kind:'moto',category:'Street',name:'Moto cadastrada'});
+ const draft=new URL(whatsapp(manual,undefined,'https://loja.example/catalogo/')).searchParams.get('text');
+ assert.equal(draft,'Olá, Vavau! Tenho interesse na Moto cadastrada. Ela ainda está disponível?\n\nhttps://loja.example/catalogo/#produto=manual-bike');
+ const generic=new URL(whatsapp(undefined,'trocar minha moto')).searchParams.get('text');assert.equal(generic,'Olá, Vavau! Gostaria de saber mais sobre trocar minha moto.');
 });

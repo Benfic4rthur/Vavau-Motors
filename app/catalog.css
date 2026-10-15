@@ -104,3 +104,5 @@
 .storefront .visit p:last-child,.storefront .visit-phone,.storefront .instagram-link,.storefront .footer-bottom>span:nth-child(2){color:var(--theme-muted)}
 .storefront .visit .button.outline{color:var(--theme-foreground);border-color:var(--theme-border)}
 .storefront .visit,.storefront .footer-top{border-color:var(--theme-border)}
+.whatsapp-note{font-size:10px;line-height:1.6;color:#626c57;margin:10px 0 0}
+.whatsapp-note+.availability-note{margin-top:8px}

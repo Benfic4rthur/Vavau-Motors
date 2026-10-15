@@ -1,4 +1,26 @@
 {
-  "items": {},
+  "items": {
+    "teste-upload-a55a2c29-2943-4fb0-a2a0-91f56c31cde4": {
+      "name": "Teste técnico de upload — rascunho",
+      "brand": "Teste",
+      "model": "Verificação",
+      "category": "Street",
+      "year": null,
+      "manufactureYear": null,
+      "km": null,
+      "price": null,
+      "color": "",
+      "engineCc": null,
+      "horsepower": null,
+      "images": [
+        "/assets/manual-teste-upload-a55a2c29-2943-4fb0-a2a0-91f56c31cde4-5143f1d9-e4f7-44df-b2da-5390b9947537.webp"
+      ],
+      "description": "Rascunho temporário de verificação técnica. Será removido após o teste.",
+      "features": [],
+      "status": "draft",
+      "featured": false,
+      "sourceDate": "2026-10-15T03:42:51.835Z"
+    }
+  },
   "ignorePosts": []
 }

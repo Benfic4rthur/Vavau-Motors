@@ -63,6 +63,34 @@
       ],
       "featured": true,
       "sourceDate": "2026-07-10T21:08:14.000Z"
+    },
+    "DcUKVSNFglo": {
+      "name": "Honda Biz 125 ES 2008",
+      "customerName": "",
+      "brand": "Honda",
+      "model": "Biz 125 ES",
+      "category": "Scooter & Cub",
+      "year": 2008,
+      "manufactureYear": 2007,
+      "km": 21374,
+      "price": 9900,
+      "color": "Cinza",
+      "engineCc": 124,
+      "horsepower": 9.2,
+      "images": [
+        "/assets/moto-honda-biz-125-es-2008-01.webp",
+        "/assets/moto-honda-biz-125-es-2008-02.webp",
+        "/assets/moto-honda-biz-125-es-2008-03.webp",
+        "/assets/moto-honda-biz-125-es-2008-04.webp",
+        "/assets/moto-honda-biz-125-es-2008-05.webp",
+        "/assets/moto-honda-biz-125-es-2008-06.webp",
+        "/assets/moto-honda-biz-125-es-2008-07.webp",
+        "/assets/moto-honda-biz-125-es-2008-08.webp"
+      ],
+      "description": "Biz 125 ES 2008. cor cinza. 21.374 km anunciados.",
+      "features": [],
+      "featured": true,
+      "sourceDate": "2026-08-21T20:08:50.000Z"
     }
   },
   "ignorePosts": []

@@ -18,7 +18,8 @@
       "vite/client",
       "node"
     ],
-    "allowJs": true
+    "allowJs": true,
+    "allowImportingTsExtensions": true
   },
   "include": [
     "app",

@@ -89,3 +89,18 @@
 .storefront .hero-moto{mask-image:linear-gradient(90deg,transparent 0%,#000 20%,#000 100%)}
 @media(max-width:800px){.storefront .hero-moto{mask-image:none}}
 @media(max-width:580px){.motorcycle-brand-logo{width:78px;height:46px;padding:9px}.motorcycle-brand-logo.compact{width:49px;height:28px;padding:5px}.card-brand{min-height:28px}.story-motorcycle{gap:12px}.story-motorcycle .story-bike{font-size:14px}.delivery-dialog .delivery-description{gap:14px}}
+
+/* Paint-aware surfaces retain readable contrast for both dark and light motorcycles. */
+.storefront .hero,.storefront .header,.storefront .trust-strip,.storefront .visit,.storefront footer,.storefront .hero-feature{color:var(--theme-foreground)}
+.storefront .topbar,.storefront .hero-description,.storefront .hero-location,.storefront .scroll-cue,.storefront .trust-strip p span,.storefront .hero-feature small{color:var(--theme-muted)}
+.storefront .hero h1 span,.storefront .hero-copy .eyebrow,.storefront .hero-feature span:not(.round-link),.storefront .trust-strip svg,.storefront .scroll-cue>span:last-child{color:var(--theme-highlight)}
+.storefront .header,.storefront .trust-strip,.storefront .hero-feature,.storefront .scroll-cue{border-color:var(--theme-border)}
+.storefront .header .brand img,.storefront footer .brand img{filter:var(--theme-logo-filter)}
+.storefront .header .button.outline{color:var(--theme-foreground);border-color:var(--theme-border)}
+.storefront .hero .gold-line{background:var(--theme-highlight)}
+.storefront .hero-feature{transition:background-color .5s,color .5s}
+.storefront .hero,.storefront .header,.storefront .trust-strip{transition:background-color .5s,color .5s}
+.storefront .visit .eyebrow,.storefront .visit h2 em{color:var(--theme-highlight)}
+.storefront .visit p:last-child,.storefront .visit-phone,.storefront .instagram-link,.storefront .footer-bottom>span:nth-child(2){color:var(--theme-muted)}
+.storefront .visit .button.outline{color:var(--theme-foreground);border-color:var(--theme-border)}
+.storefront .visit,.storefront .footer-top{border-color:var(--theme-border)}

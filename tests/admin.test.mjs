@@ -70,3 +70,47 @@ test('GitHub commit refuses concurrent head changes and never forces updates',as
  await assert.rejects(store.commit([{path:'data/catalog.json',data:[]}],'save','revision','changed-head'),e=>e.status===409);assert.equal(calls.length,1);calls.length=0;
  assert.equal(await store.commit([{path:'data/catalog.json',data:[]},{path:'public/assets/photo.webp',sha:'a'.repeat(40)}],'save','revision','head'),'new-commit');const update=calls.find(c=>c.method==='PATCH');assert.equal(update.body.force,false);assert.deepEqual(calls.find(c=>c.path==='git/commits').body.parents,['head']);assert.equal(calls.find(c=>c.path==='git/trees').body.tree.length,2);
 });
+
+test('GitHub save replaces the old cover atomically in catalog, public seed and overrides',async()=>{
+ const bike=(id,featured,color='Azul')=>productSchema.parse({id,kind:'moto',name:'Moto '+id,brand:'Honda',model:id,category:'Street',status:'available',images:['/assets/'+id+'.webp'],featured,color});
+ const previous=bike('fazer',true,'Vermelha'),biz=bike('biz',false,'Cinza'),other=bike('other',false);
+ let products=[previous,biz,other],overrides={items:{fazer:{featured:true,description:'Preservar descrição'},ghost:{featured:true}},ignorePosts:['ignored']},revision='r0';
+ const store=new GitHubStore({GITHUB_WRITE_TOKEN:'test-only'});let writes=0;
+ store.api=async()=>({object:{sha:'head'}});
+ store.file=async path=>({sha:revision,content:Buffer.from(JSON.stringify(path==='data/catalog.json'?products:overrides)).toString('base64')});
+ store.commit=async(files,message,expectedRevision,expectedHead)=>{
+  assert.equal(expectedRevision,revision);assert.equal(expectedHead,'head');assert.equal(files.length,3);
+  products=structuredClone(files.find(f=>f.path==='data/catalog.json').data);
+  const publicSeed=files.find(f=>f.path==='public/catalog-seed.json').data;
+  assert.equal(publicSeed.filter(p=>p.featured).length,1);
+  overrides=structuredClone(files.find(f=>f.path==='data/overrides.json').data);revision='r'+(++writes);
+ };
+ let result=await store.save({...biz,featured:true},[],'r0');
+ assert.deepEqual(result.products.filter(p=>p.featured).map(p=>p.id),['biz']);
+ assert.deepEqual(result.products.find(p=>p.id==='fazer'),{...previous,featured:false});
+ assert.equal(overrides.items.fazer.featured,false);assert.equal(overrides.items.ghost.featured,false);
+ assert.equal(overrides.items.fazer.description,'Preservar descrição');assert.deepEqual(overrides.ignorePosts,['ignored']);
+ result=await store.save({...other,description:'Edição normal'},[],'r1');
+ assert.deepEqual(result.products.filter(p=>p.featured).map(p=>p.id),['biz']);
+ await assert.rejects(store.save({...previous,featured:true},[],'r0'),e=>e.status===409);assert.equal(writes,2);
+ result=await store.save({...previous,featured:true},[],'r2');
+ assert.deepEqual(result.products.filter(p=>p.featured).map(p=>p.id),['fazer']);assert.equal(overrides.items.biz.featured,false);
+});
+
+test('real local storage and admin API switch the cover and remove it when sold',async()=>{
+ const {LocalStore}=await import('../server/local-store.mjs');const {mkdtemp,writeFile,rm}=await import('node:fs/promises');const {tmpdir}=await import('node:os');const {join}=await import('node:path');
+ const store=new LocalStore();store.root=await mkdtemp(join(tmpdir(),'vavau-cover-'));
+ try{
+  const bikes=['blue','red','biz'].map(id=>productSchema.parse({id,kind:'moto',name:'Moto '+id,brand:'Honda',model:id,category:'Street',status:'available',images:['/assets/'+id+'.webp'],featured:id==='blue'}));
+  await writeFile(store.root+'/catalog.json',JSON.stringify(bikes));
+  const handle=createAdminService(env,store),req=(action,body,cookie='')=>handle(new Request('https://catalog.example/api/admin?action='+action,{method:body?'POST':'GET',headers:{Origin:'https://catalog.example','Content-Type':'application/json','X-Vavau-Admin':'1','X-Real-IP':'cover-'+(++ip),Cookie:cookie},body:body?JSON.stringify(body):undefined}));
+  const login=await req('login',{username:'admin',password:'test-password-2026'});const cookie=login.headers.get('set-cookie').split(';')[0];
+  for(const id of ['red','biz']){
+   const current=await store.read(),product=current.products.find(p=>p.id===id);
+   const saved=await req('save',{product:{...product,featured:true},uploads:[],revision:current.revision},cookie);assert.equal(saved.status,200);
+   const response=await req('public');assert.equal(response.headers.get('cache-control'),'no-store');const list=await response.json();assert.deepEqual(list.filter(p=>p.featured).map(p=>p.id),[id]);
+  }
+  const current=await store.read();const sold=await req('save',{product:{...current.products[0],status:'sold'},uploads:[],revision:current.revision},cookie);assert.equal(sold.status,200);
+  assert.equal((await (await req('public')).json()).some(p=>p.id==='biz'),false);
+ }finally{await rm(store.root,{recursive:true,force:true});}
+});

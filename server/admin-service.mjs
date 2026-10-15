@@ -16,7 +16,7 @@ export function createAdminService(env,store=new GitHubStore(env)){
   try{
    if(request.method==='GET'&&action==='public'){
     const products=(await store.publicRead()).filter(p=>p.status==='available'&&['moto','cliente'].includes(p.kind));
-    return reply(products.map(p=>({...p,images:p.images.map(src=>store.publicAsset(src))})),200,{'Access-Control-Allow-Origin':'*','Cache-Control':'public, max-age=15, s-maxage=15, stale-while-revalidate=30'});
+    return reply(products.map(p=>({...p,images:p.images.map(src=>store.publicAsset(src))})),200,{'Access-Control-Allow-Origin':'*','Cache-Control':'no-store'});
    }
    if(request.method==='GET'&&action==='asset'&&store.readAsset){const name=url.searchParams.get('name')||'';if(!/^manual-[\w-]+\.webp$/.test(name))return reply({error:'Foto não encontrada.'},404);const body=await store.readAsset(name);return new Response(body,{headers:{'Content-Type':'image/webp','Cache-Control':'public, max-age=86400','X-Content-Type-Options':'nosniff'}});}
    if(!['GET','POST'].includes(request.method))return reply({error:'Método não permitido.'},405);

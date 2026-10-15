@@ -66,7 +66,10 @@ test('hero chooses newest eligible stock, hashtag wins, sold items never win',()
 test('hero has distinct blue, green and graphite palettes while gold stays in the brand CSS',()=>{
   assert.notEqual(themeForColor('Azul')['--theme-dark'],themeForColor('Verde')['--theme-dark']);
   assert.notEqual(themeForColor('Preto')['--theme-dark'],themeForColor('Verde')['--theme-dark']);
-  assert.equal(themeForColor('Cinza')['--theme-dark'],themeForColor('Preto')['--theme-dark']);
+  assert.notEqual(themeForColor('Cinza')['--theme-dark'],themeForColor('Preto')['--theme-dark']);
+  assert.equal(themeForColor('Cinza')['--theme-foreground'],'#282421');
+  assert.equal(themeForColor('Preto')['--theme-foreground'],'#f3f3ec');
+  assert.equal(themeForColor('Azul','#b8afa5')['--theme-dark'],'rgb(184,175,165)');
 });
 test('published seed is validated, contains only current-scope records and every image exists',async()=>{
   const products=productSchema.array().parse(JSON.parse(await readFile('public/catalog-seed.json','utf8')));

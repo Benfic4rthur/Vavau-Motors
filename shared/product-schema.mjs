@@ -5,7 +5,7 @@ export const productSchema = z.object({
  customerName:z.string().trim().max(120).default(''),
  brand:z.string().max(80).default(''), model:z.string().trim().max(120).default(''), category:z.string().min(1).max(80),
  year:z.number().int().min(1900).max(2100).nullable().default(null), manufactureYear:z.number().int().min(1900).max(2100).nullable().default(null),
- km:z.number().int().min(0).max(3000000).nullable().default(null), price:z.number().min(0).max(10000000).nullable().default(null), color:z.string().max(80).default(''),
+ km:z.number().int().min(0).max(3000000).nullable().default(null), price:z.number().min(0).max(10000000).nullable().default(null), color:z.string().max(80).default(''), coverTone:z.string().regex(/^$|^#[0-9a-fA-F]{6}$/).default(''),
  engineCc:z.number().min(0).max(10000).nullable().default(null), horsepower:z.number().min(0).max(1000).nullable().default(null),
  images:z.array(image).max(30).default([]), source:z.string().max(2000).refine(s=>!s||/^https:\/\//.test(s),'URL HTTPS inválida').default(''),
  description:z.string().max(8000).default(''), features:z.array(z.string().max(200)).max(30).default([]),

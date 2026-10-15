@@ -1,4 +1,5 @@
 import {randomUUID} from 'node:crypto';
+import {updateCatalog} from './catalog-update.mjs';
 export class StoreError extends Error{constructor(message,status=500){super(message);this.status=status;}}
 const json=value=>JSON.stringify(value,null,2)+'\n';
 const safeJson=value=>{try{return JSON.parse(Buffer.from(value.content.replace(/\n/g,''),'base64').toString());}catch{throw new StoreError('O arquivo do catálogo precisa ser conferido.',502);}};
@@ -13,6 +14,34 @@ export class GitHubStore{
  async readAuth(){try{return safeJson(await this.file('data/admin-auth.enc.json'));}catch(error){if(error.status===404||!this.connected)return null;throw error;}}
  async commit(files,message,expectedRevision,expectedHead){const ref=await this.api('git/ref/heads/'+this.branch);const head=ref.object.sha;if(expectedHead&&head!==expectedHead)throw new StoreError('Outra atualização chegou ao repositório. Atualize a lista antes de salvar.',409);const commit=await this.api('git/commits/'+head);if(expectedRevision){const current=await this.file('data/catalog.json',head);if(current.sha!==expectedRevision)throw new StoreError('Outra atualização chegou ao catálogo. Atualize a lista antes de salvar.',409);}const tree=await this.api('git/trees','POST',{base_tree:commit.tree.sha,tree:files.map(file=>file.sha?{path:file.path,mode:'100644',type:'blob',sha:file.sha}:{path:file.path,mode:'100644',type:'blob',content:json(file.data)})});const next=await this.api('git/commits','POST',{message,tree:tree.sha,parents:[head]});await this.api('git/refs/heads/'+this.branch,'PATCH',{sha:next.sha,force:false});return next.sha;}
  async upload(productId,bytes){const name=`manual-${productId}-${randomUUID()}.webp`;const result=await this.api('git/blobs','POST',{encoding:'base64',content:bytes.toString('base64')});return {path:'public/assets/'+name,sha:result.sha,image:'/assets/'+name};}
- async save(product,uploads,revision){const ref=await this.api('git/ref/heads/'+this.branch);const head=ref.object.sha;const catalog=await this.file('data/catalog.json',head);const current={products:safeJson(catalog),revision:catalog.sha};if(current.revision!==revision)throw new StoreError('O catálogo mudou. Atualize antes de salvar.',409);const products=current.products.filter(p=>p.id!==product.id);products.unshift(product);let overrides;try{overrides=safeJson(await this.file('data/overrides.json',head));}catch(e){if(e.status!==404)throw e;overrides={items:{},ignorePosts:[]};}const {id,kind,source,collectedAt,...patch}=product;overrides.items||={};overrides.items[id]={...overrides.items[id],...patch};if(product.status==='available')delete overrides.items[id].status;const files=[{path:'data/catalog.json',data:products},{path:'public/catalog-seed.json',data:products.filter(p=>p.status==='available')},{path:'data/overrides.json',data:overrides},...uploads.map(f=>({path:f.path,sha:f.sha}))];await this.commit(files,`Atualiza ${product.kind==='moto'?'moto':'entrega'}: ${product.name}`,revision,head);return this.read();}
+ async save(product,uploads,revision){
+  const ref=await this.api('git/ref/heads/'+this.branch),head=ref.object.sha;
+  const catalog=await this.file('data/catalog.json',head);
+  const current={products:safeJson(catalog),revision:catalog.sha};
+  if(current.revision!==revision)throw new StoreError('O catálogo mudou. Atualize antes de salvar.',409);
+  const products=updateCatalog(current.products,product);
+  let overrides;
+  try{overrides=safeJson(await this.file('data/overrides.json',head));}
+  catch(e){if(e.status!==404)throw e;overrides={items:{},ignorePosts:[]};}
+  const {id,kind,source,collectedAt,...patch}=product;
+  overrides.items||={};
+  if(products[0].featured){
+   // Clear both the catalog flags and persistent manual overrides in this commit.
+   for(const previous of current.products){
+    if(previous.id!==id&&previous.featured)overrides.items[previous.id]={...overrides.items[previous.id],featured:false};
+   }
+   for(const [otherId,item] of Object.entries(overrides.items))if(otherId!==id&&item.featured)item.featured=false;
+  }
+  overrides.items[id]={...overrides.items[id],...patch,featured:products[0].featured};
+  if(product.status==='available')delete overrides.items[id].status;
+  const files=[
+   {path:'data/catalog.json',data:products},
+   {path:'public/catalog-seed.json',data:products.filter(p=>p.status==='available')},
+   {path:'data/overrides.json',data:overrides},
+   ...uploads.map(f=>({path:f.path,sha:f.sha}))
+  ];
+  await this.commit(files,`Atualiza ${product.kind==='moto'?'moto':'entrega'}: ${product.name}`,revision,head);
+  return this.read();
+ }
  async writeAuth(envelope){await this.commit([{path:'data/admin-auth.enc.json',data:envelope}],'Atualiza acesso da equipe');}
 }

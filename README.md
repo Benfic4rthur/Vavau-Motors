@@ -16,7 +16,7 @@ npm run build
 
 A prévia abre em http://127.0.0.1:5173/. Publique o conteúdo de `dist-static/` em qualquer hospedagem estática. Para domínio próprio, a base padrão é `/`; para uma subpasta, defina `PAGES_BASE` antes de gerar a versão. `npm run build:pages` gera também `docs/`, com base `/Vavau-Motors/` e `.nojekyll`.
 
-O repositório deve permanecer privado. O GitHub exige um plano com Pages em repositórios privados. Sem esse recurso, use outra hospedagem estática sem mudar o código.
+O repositório foi tornado público com autorização do proprietário para usar GitHub Pages. O site e suas fotos são públicos. Para migrar mantendo o código privado, use um plano com Pages privado ou outra hospedagem estática.
 
 ## Dados, correções e capa
 

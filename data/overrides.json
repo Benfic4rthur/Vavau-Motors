@@ -1,4 +1,37 @@
 {
-  "items": {},
+  "items": {
+    "DcgjfwOFhMT": {
+      "name": "Suzuki GSX 1300 R Hayabusa 2013",
+      "customerName": "",
+      "brand": "Suzuki",
+      "model": "GSX 1300 R Hayabusa",
+      "category": "Esportiva",
+      "year": 2013,
+      "manufactureYear": 2012,
+      "km": 45047,
+      "price": 56900,
+      "color": "Azul",
+      "engineCc": 1340,
+      "horsepower": 197,
+      "images": [
+        "/assets/moto-suzuki-gsx-1300-r-hayabusa-2013-01.webp",
+        "/assets/moto-suzuki-gsx-1300-r-hayabusa-2013-02.webp",
+        "/assets/moto-suzuki-gsx-1300-r-hayabusa-2013-03.webp",
+        "/assets/moto-suzuki-gsx-1300-r-hayabusa-2013-04.webp",
+        "/assets/moto-suzuki-gsx-1300-r-hayabusa-2013-05.webp",
+        "/assets/moto-suzuki-gsx-1300-r-hayabusa-2013-06.webp",
+        "/assets/moto-suzuki-gsx-1300-r-hayabusa-2013-07.webp",
+        "/assets/moto-suzuki-gsx-1300-r-hayabusa-2013-08.webp",
+        "/assets/moto-suzuki-gsx-1300-r-hayabusa-2013-09.webp",
+        "/assets/moto-suzuki-gsx-1300-r-hayabusa-2013-10.webp",
+        "/assets/moto-suzuki-gsx-1300-r-hayabusa-2013-11.webp",
+        "/assets/moto-suzuki-gsx-1300-r-hayabusa-2013-12.webp"
+      ],
+      "description": "GSX 1300 R Hayabusa 2013. cor azul. 45.047 km anunciados.",
+      "features": [],
+      "featured": true,
+      "sourceDate": "2026-08-26T15:39:36.000Z"
+    }
+  },
   "ignorePosts": []
 }
